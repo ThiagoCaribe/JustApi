@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.get('/usuarios', async (req, resp)=>{
     try{
+        
         let r = await db.usuario.findAll();
         resp.send(r);
     }catch(e){
