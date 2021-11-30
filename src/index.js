@@ -39,9 +39,13 @@ app.post('/login', async (req, resp) =>{
         if(nome === '' || senha =='')
             return resp.send("Não é permitido campo vazio");
         let r = await db.tb_usuario.findAll({where : {nm_usuario : nome, ds_senha :senhaC }});
-        if(r === [] || r == undefined )
+        if(r.length != 0 ){
+            return resp.send("Usuario encontrado");
+        }else{
             return resp.send("Usuario nao encontrado");
-        resp.send(r);
+        }
+        resp.send(200);
+        
     }
     catch(e){
         resp.send({erro : e.toString()});
